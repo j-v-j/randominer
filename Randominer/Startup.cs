@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Randominer.Settings;
 
 namespace Randominer
 {
@@ -12,7 +13,11 @@ namespace Randominer
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            var config = new ConfigurationBuilder()
+                .AddConfiguration(configuration)
+                .AddJsonFile("apikeys.json", true, true);
+
+            Configuration = config.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -27,6 +32,8 @@ namespace Randominer
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            services.Configure<ApiKeys>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +69,8 @@ namespace Randominer
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+
+
         }
     }
 }
