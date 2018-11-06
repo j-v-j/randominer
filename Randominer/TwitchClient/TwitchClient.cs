@@ -29,7 +29,7 @@ namespace Randominer.TwitchClient
             return msg;
         }
 
-        public string GetRandomStreamUri()
+         public async Task<string> GetRandomStreamUri()
         {
             throw new NotImplementedException();
         }

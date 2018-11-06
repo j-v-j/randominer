@@ -10,6 +10,6 @@ namespace Randominer.TwitchClient
 
         Task<string> VerifyConnectionAsync();
 
-        string GetRandomStreamUri();
+        Task<string>  GetRandomStreamUri();
     }
 }

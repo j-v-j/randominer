@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using Randominer.Settings;
 using System.Net.Http;
 using System.Net;
+using System.IO;
 
 namespace TestRandominer
 {
@@ -41,9 +42,23 @@ namespace TestRandominer
         }
 
         [Fact]
-        public void Test1()
+        public async System.Threading.Tasks.Task TestGetRandomStreamUriMustReturnSingleStreamAsync()
         {
 
+            _fakeHttpMessageHandler.Setup(f => f.Send(It.IsAny<HttpRequestMessage>())).Returns(new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent
+                (File.ReadAllText("streams.json"))
+            });
+            
+            var apiKeys = Options.Create(new ApiKeys());
+            apiKeys.Value.twitch = "1234";
+
+            var client = new TwitchClient(apiKeys,_httpClient);
+            var result = await client.GetRandomStreamUri();
+
+            
         }
     }
 }
