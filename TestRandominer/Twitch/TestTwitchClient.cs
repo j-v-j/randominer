@@ -1,4 +1,4 @@
-using Randominer.TwitchClient;
+using Randominer.Twitch;
 using System;
 using Xunit;
 using Moq;
@@ -35,7 +35,7 @@ namespace TestRandominer
             apiKeys.Value.twitch = "1234";
 
 
-            var client = new TwitchClient(apiKeys,_httpClient);
+            var client = new TwitchClient(apiKeys.Value.twitch, _httpClient);
             var result = await client.VerifyConnectionAsync();
 
             Assert.IsType<string>(result);
@@ -55,8 +55,8 @@ namespace TestRandominer
             var apiKeys = Options.Create(new ApiKeys());
             apiKeys.Value.twitch = "1234";
 
-            var client = new TwitchClient(apiKeys,_httpClient);
-            var result = await client.GetRandomStreamUri();
+            var client = new TwitchClient(apiKeys.Value.twitch,_httpClient);
+            var result = await client.GetStreams();
 
             
         }

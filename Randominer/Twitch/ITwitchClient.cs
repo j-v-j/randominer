@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Randominer.TwitchClient
+namespace Randominer.Twitch
 {
     interface ITwitchClient
-    {
-
+    {        
         Task<string> VerifyConnectionAsync();
+        Task<string> GetStreams();
 
-        Task<string>  GetRandomStreamUri();
     }
 }
