@@ -10,20 +10,19 @@ namespace Randominer.TwitchClient
 {
     public class TwitchClient : ITwitchClient
     {
-        protected ApiKeys apiKeys;
-        protected HttpClient twitchHttpClient;
+        protected string _apiKey;
+        protected HttpClient _httpClient;
 
-        public TwitchClient(IOptions<ApiKeys> keys)
+        public TwitchClient(IOptions<ApiKeys> keys, HttpClient httpClient = null)
         {
-            this.apiKeys = keys.Value;
+            _apiKey = keys.Value.twitch;
+            _httpClient = httpClient != null ? httpClient : new HttpClient();
         }
 
         public async Task<string> VerifyConnectionAsync()
         {
-            twitchHttpClient = new HttpClient();
-
-            twitchHttpClient.DefaultRequestHeaders.Add("Client-ID", apiKeys.twitch);
-            var request = twitchHttpClient.GetStringAsync("https://api.twitch.tv/helix/streams?game_id=33214");
+            _httpClient.DefaultRequestHeaders.Add("Client-ID", _apiKey);
+            var request = _httpClient.GetStringAsync("https://api.twitch.tv/helix/streams?game_id=33214");
 
             var msg = await request;
 
