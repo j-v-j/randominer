@@ -14,13 +14,11 @@ namespace Randominer.Twitch
             _twitchClient = twitchClient != null ? twitchClient : new TwitchClient(apiKey);
         }
 
-        public async Task<string> GetRandomStreamUri()
+        public async Task<StreamDTO> GetRandomStream()
         {
             var streams = await _twitchClient.GetStreams();
 
-           // return streams.ElementAt(new Random().Next(1, streams.Count()));
-
-            throw new NotImplementedException();
+            return streams.data.ElementAt(new Random().Next(1, streams.data.Count()));
         }
     }
 }
