@@ -7,6 +7,7 @@ using Randominer.Settings;
 using System.Net.Http;
 using System.Net;
 using System.IO;
+using System.Collections.Generic;
 
 namespace TestRandominer
 {
@@ -42,7 +43,7 @@ namespace TestRandominer
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task TestGetRandomStreamUriMustReturnSingleStreamAsync()
+        public async System.Threading.Tasks.Task TestGetRandomStreamsMustReturnStreamListDTO()
         {
 
             _fakeHttpMessageHandler.Setup(f => f.Send(It.IsAny<HttpRequestMessage>())).Returns(new HttpResponseMessage
@@ -58,7 +59,7 @@ namespace TestRandominer
             var client = new TwitchClient(apiKeys.Value.twitch,_httpClient);
             var result = await client.GetStreams();
 
-            
+            Assert.IsType<StreamListDTO>(result);
         }
     }
 }

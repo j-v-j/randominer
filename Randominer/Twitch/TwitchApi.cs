@@ -16,6 +16,10 @@ namespace Randominer.Twitch
 
         public async Task<string> GetRandomStreamUri()
         {
+            var streams = await _twitchClient.GetStreams();
+
+           // return streams.ElementAt(new Random().Next(1, streams.Count()));
+
             throw new NotImplementedException();
         }
     }
