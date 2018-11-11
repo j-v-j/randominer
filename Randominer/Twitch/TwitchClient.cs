@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Randominer.Twitch
 {
@@ -29,13 +30,20 @@ namespace Randominer.Twitch
             return msg;
         }
         
-        public async Task<string> GetStreams()
+        public async Task<StreamListDTO> GetStreams()
         {
-            var request = _httpClient.GetStringAsync("https://api.twitch.tv/helix/streams");
+            var request = _httpClient.GetAsync("https://api.twitch.tv/helix/streams");
 
-            var msg = await request;
+            StreamListDTO streamListDTO = null;
 
-            return msg;
+            if (request.IsCompletedSuccessfully)
+            {
+                var str = await request.Result.Content.ReadAsStringAsync();
+                streamListDTO = JsonConvert.DeserializeObject<StreamListDTO>(str);
+            }
+
+
+            return streamListDTO;
 
         }
     }

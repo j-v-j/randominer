@@ -8,7 +8,7 @@ namespace Randominer.Twitch
     interface ITwitchClient
     {        
         Task<string> VerifyConnectionAsync();
-        Task<string> GetStreams();
+        Task<StreamListDTO> GetStreams();
 
     }
 }
