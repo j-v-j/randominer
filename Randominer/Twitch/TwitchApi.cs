@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Randominer.Twitch
 {
-    public class TwitchApi
+    public class TwitchApi : ITwitchApi
     {
         private TwitchClient _twitchClient;
 

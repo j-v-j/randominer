@@ -36,15 +36,11 @@ namespace Randominer.Twitch
 
             StreamListDTO streamListDTO = null;
 
-            if (request.IsCompletedSuccessfully)
-            {
-                var str = await request.Result.Content.ReadAsStringAsync();
-                streamListDTO = JsonConvert.DeserializeObject<StreamListDTO>(str);
-            }
+            var str = await request.Result.Content.ReadAsStringAsync();
 
+            streamListDTO = JsonConvert.DeserializeObject<StreamListDTO>(str); 
 
             return streamListDTO;
-
         }
     }
 }
