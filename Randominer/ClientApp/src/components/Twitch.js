@@ -1,7 +1,4 @@
 ﻿import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 const TWITCH_EMBED_URL = "https://embed.twitch.tv/embed/v1.js";
 const TWITCH_URL = "https://twitch.tv/"

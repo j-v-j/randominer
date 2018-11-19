@@ -1,16 +1,22 @@
 ﻿import React from 'react';
-import { Route } from 'react-router';
-import Layout from './components/Layout';
-import Home from './components/Home';
-import Counter from './components/Counter';
-import FetchData from './components/FetchData';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Twitch from './components/Twitch';
 
 export default () => (
-  <Layout>
-    <Route exact path='/' component={Home} />
-    <Route path='/counter' component={Counter} />
-    <Route path='/fetchdata/:startDateIndex?' component={FetchData} />
-    <Route path='/twitch' component={Twitch} />
-  </Layout>
+    <Router>
+        <div>
+            <ul>
+                <li>
+                    <Link to="/">Twitch</Link>
+                </li>
+                <li>
+                    <Link to="/Twitch">Twitch</Link>
+                </li>
+            </ul>
+
+            <hr />
+    <Route exact path='/' component={Twitch} />
+            <Route path='/twitch' component={Twitch} />
+        </div>
+    </Router>
 );
