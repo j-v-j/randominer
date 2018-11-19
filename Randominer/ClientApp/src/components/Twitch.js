@@ -1,4 +1,5 @@
 ﻿import React, { Component } from 'react';
+import { Glyphicon } from 'react-bootstrap'
 
 const TWITCH_EMBED_URL = "https://embed.twitch.tv/embed/v1.js";
 const TWITCH_URL = "https://twitch.tv/"
@@ -55,7 +56,7 @@ export class Twitch extends Component {
                 <h1> Random Twitch Stream</h1>
                 <a href={ TWITCH_URL + this.state.streamData.user_name}>{this.state.streamData.title}</a>
                 <div id="twitch-embed"></div>
-                <button onClick={this.handleClick}>Reroll</button>
+                <button className="btn btn-primary" onClick={this.handleClick}><Glyphicon glyph="refresh" /> Reroll</button>
             </div>
         );
         

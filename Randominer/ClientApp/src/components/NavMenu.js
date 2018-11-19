@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import './NavMenu.css';
 
 export default props => (
-  <Navbar inverse fixedTop fluid collapseOnSelect>
+  <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
         <Link to={'/'}>Randominer</Link>
