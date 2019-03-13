@@ -20,9 +20,16 @@ namespace Randominer.Twitch
         public string thumbnail_url { get; set; }
 
     }
-
+    
     public class StreamListDTO
     {
         public List<StreamDTO> data { get; set; }
+    }
+    
+    public class StreamSummaryDTO
+    {
+        public int Channels { get; set; }
+
+        public int Viewers { get; set; }
     }
 }

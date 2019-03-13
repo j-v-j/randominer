@@ -32,15 +32,26 @@ namespace Randominer.Twitch
         
         public async Task<StreamListDTO> GetStreams()
         {
-            var request = _httpClient.GetAsync("https://api.twitch.tv/helix/streams");
-
-            StreamListDTO streamListDTO = null;
+            var offset = new Random().Next(0, await GetOffset(25));
+            var request = _httpClient.GetAsync($"https://api.twitch.tv/helix/streams?offset={offset}");            
 
             var str = await request.Result.Content.ReadAsStringAsync();
 
-            streamListDTO = JsonConvert.DeserializeObject<StreamListDTO>(str); 
-
+            var streamListDTO = JsonConvert.DeserializeObject<StreamListDTO>(str);
             return streamListDTO;
+        }
+
+        
+        
+        public async Task<int> GetOffset(int streamLimit)
+        {
+            var request = _httpClient.GetAsync($"https://api.twitch.tv/helix/streams/summary");            
+
+            var str = await request.Result.Content.ReadAsStringAsync();
+
+            var streamSummary = JsonConvert.DeserializeObject<StreamSummaryDTO>(str);
+
+            return streamSummary != null && streamSummary.Channels > streamLimit ? new Random().Next(0, streamSummary.Channels-streamLimit) : 0;
         }
     }
 }
